@@ -1,33 +1,29 @@
 import React from "react";
+import { Contact } from "./types";
+import { GetInitials } from "./utils";
 
 type Props = {
-  data: {
-    firstNameLastName: string;
-    jobTitle: string;
-    emailAddress: string;
-  };
+  data: Contact;
+  onClick: (contact: Contact) => void;
+  isSelected?: boolean;
 };
 
-function PersonInfo(props: Props) {
-  const { data } = props;
+function PersonInfo({ data, isSelected, onClick }: Props) {
+  const { firstNameLastName, jobTitle, emailAddress } = data;
+
   return (
     <div
-      style={{
-        display: "flex",
-        height: "100px",
-        justifyContent: "center",
-        flexDirection: "column",
-        padding: "32px",
-        boxShadow: "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
-        margin: "10px 0",
-        background: "#fff",
-        cursor: "pointer",
-      }}
-      className="person-info"
+      className={`person-info ${isSelected && "person-info--selected"}`}
+      onClick={() => onClick(data)}
     >
-      <div className="firstNameLastName">{data.firstNameLastName}</div>
-      <div className="jobTitle">{data.jobTitle}</div>
-      <div className="emailAddress">{data.emailAddress}</div>
+      <div className="person-title">
+        <div className="initials">{GetInitials(firstNameLastName)}</div>
+        <div>
+          <div className="firstNameLastName">{firstNameLastName}</div>
+          <div className="jobTitle">{jobTitle}</div>
+        </div>
+      </div>
+      <div className="emailAddress">{emailAddress}</div>
     </div>
   );
 }
