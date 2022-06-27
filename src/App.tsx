@@ -1,18 +1,10 @@
 import React from "react";
-import PersonInfo from "./PersonInfo";
+import PersonInfo from "./components/PersonInfo";
 import { useFetchData } from "./hooks";
 import { Contact } from "./types";
-import { GetInitials } from "./utils";
 import ScrollToTop from "react-scroll-to-top";
-import {
-  AppWrapper,
-  Loader,
-  FetchButton,
-  SelectedContacts,
-  SelectedInitials,
-  StyledList,
-  Initials,
-} from "./styles";
+import { AppWrapper, Loader, FetchButton, StyledList } from "./styles";
+import { SelectedContactsSummary } from "./components/SelectedContactsSummary";
 
 function App() {
   const [selected, setSelected] = React.useState<Contact[]>([]);
@@ -40,16 +32,7 @@ function App() {
 
   return (
     <AppWrapper>
-      <SelectedContacts>
-        Selected contacts: {selected.length}
-        <SelectedInitials>
-          {selected.map(({ firstNameLastName, id }) => (
-            <Initials key={`initial${id}`}>
-              {GetInitials(firstNameLastName)}
-            </Initials>
-          ))}
-        </SelectedInitials>
-      </SelectedContacts>
+      <SelectedContactsSummary selected={selected} />
       <StyledList>
         {selected.map((personInfo) => (
           <PersonInfo

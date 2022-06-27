@@ -7,29 +7,18 @@ export function useFetchData() {
   const [loading, setLoading] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState<string>();
 
-  React.useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      setErrorMsg(undefined);
-      await apiData()
-        .then((result) => setData(result))
-        .catch(handleError)
-        .finally(() => setLoading(false));
-    };
-
-    getData();
-  }, []);
-
   const fetchMore = React.useCallback(async () => {
     setLoading(true);
     setErrorMsg(undefined);
     await apiData()
       .then((result) => setData((prevData) => [...prevData, ...result]))
-      .catch(handleError)
+      .catch((error: Error) => setErrorMsg(error.message))
       .finally(() => setLoading(false));
   }, []);
 
-  const handleError = (error: Error) => setErrorMsg(error.message);
+  React.useEffect(() => {
+    fetchMore();
+  }, [fetchMore]);
 
   return { data, loading, errorMsg, fetchMore };
 }

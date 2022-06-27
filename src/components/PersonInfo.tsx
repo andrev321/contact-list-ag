@@ -5,10 +5,10 @@ import {
   JobTitle,
   PersonInfoWrapper,
   PersonTitle,
-} from "./styles";
-import { Contact } from "./types";
-import { GetInitials } from "./utils";
-import { EmailAddress } from "./styles";
+} from "../styles";
+import { Contact } from "../types";
+import { GetInitials } from "../utils";
+import { EmailAddress } from "../styles";
 
 type Props = {
   data: Contact;
