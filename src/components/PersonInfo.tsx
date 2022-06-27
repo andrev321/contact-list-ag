@@ -16,7 +16,7 @@ type Props = {
   isSelected?: boolean;
 };
 
-function PersonInfo({ data, isSelected = false, onClick }: Props) {
+export function PersonInfo({ data, isSelected = false, onClick }: Props) {
   const { firstNameLastName, jobTitle, emailAddress } = data;
 
   return (
@@ -32,5 +32,3 @@ function PersonInfo({ data, isSelected = false, onClick }: Props) {
     </PersonInfoWrapper>
   );
 }
-
-export default PersonInfo;

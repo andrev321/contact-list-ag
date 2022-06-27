@@ -1,12 +1,11 @@
 import React from "react";
-import PersonInfo from "./components/PersonInfo";
+import ScrollToTop from "react-scroll-to-top";
 import { useFetchData } from "./hooks";
 import { Contact } from "./types";
-import ScrollToTop from "react-scroll-to-top";
 import { AppWrapper, Loader, FetchButton, StyledList } from "./styles";
-import { SelectedContactsSummary } from "./components/SelectedContactsSummary";
+import { PersonInfo, SelectedContactsSummary } from "./components";
 
-function App() {
+export function App() {
   const [selected, setSelected] = React.useState<Contact[]>([]);
 
   const { data, loading, errorMsg, fetchMore } = useFetchData();
@@ -61,5 +60,3 @@ function App() {
     </AppWrapper>
   );
 }
-
-export default App;
