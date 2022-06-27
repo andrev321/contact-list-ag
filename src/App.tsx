@@ -4,6 +4,15 @@ import { useFetchData } from "./hooks";
 import { Contact } from "./types";
 import { GetInitials } from "./utils";
 import ScrollToTop from "react-scroll-to-top";
+import {
+  AppWrapper,
+  Loader,
+  FetchButton,
+  SelectedContacts,
+  SelectedInitials,
+  StyledList,
+  Initials,
+} from "./styles";
 
 function App() {
   const [selected, setSelected] = React.useState<Contact[]>([]);
@@ -30,16 +39,16 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <div className="selected">
+    <AppWrapper>
+      <SelectedContacts>
         Selected contacts: {selected.length}
-        <div className="selected-initials">
+        <SelectedInitials>
           {selected.map(({ firstNameLastName }) => (
-            <div className="initials">{GetInitials(firstNameLastName)}</div>
+            <Initials>{GetInitials(firstNameLastName)}</Initials>
           ))}
-        </div>
-      </div>
-      <div className="list">
+        </SelectedInitials>
+      </SelectedContacts>
+      <StyledList>
         {selected.map((personInfo) => (
           <PersonInfo
             key={personInfo.id}
@@ -55,16 +64,16 @@ function App() {
             onClick={handleSelection}
           />
         ))}
-        {loading && <div className="loader" />}
+        {loading && <Loader />}
         {errorMsg}
         {!loading && (
-          <button className="fetchBtn" onClick={fetchMore}>
+          <FetchButton onClick={fetchMore}>
             {errorMsg ? "Retry fetching" : "Fetch more"}
-          </button>
+          </FetchButton>
         )}
-      </div>
+      </StyledList>
       <ScrollToTop smooth component="⬆" />
-    </div>
+    </AppWrapper>
   );
 }
 

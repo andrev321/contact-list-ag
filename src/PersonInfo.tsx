@@ -1,6 +1,14 @@
 import React from "react";
+import {
+  FirstNameLastName,
+  Initials,
+  JobTitle,
+  PersonInfoWrapper,
+  PersonTitle,
+} from "./styles";
 import { Contact } from "./types";
 import { GetInitials } from "./utils";
+import { EmailAddress } from "./styles";
 
 type Props = {
   data: Contact;
@@ -8,23 +16,20 @@ type Props = {
   isSelected?: boolean;
 };
 
-function PersonInfo({ data, isSelected, onClick }: Props) {
+function PersonInfo({ data, isSelected = false, onClick }: Props) {
   const { firstNameLastName, jobTitle, emailAddress } = data;
 
   return (
-    <div
-      className={`person-info ${isSelected && "person-info--selected"}`}
-      onClick={() => onClick(data)}
-    >
-      <div className="person-title">
-        <div className="initials">{GetInitials(firstNameLastName)}</div>
+    <PersonInfoWrapper isSelected={isSelected} onClick={() => onClick(data)}>
+      <PersonTitle>
+        <Initials>{GetInitials(firstNameLastName)}</Initials>
         <div>
-          <div className="firstNameLastName">{firstNameLastName}</div>
-          <div className="jobTitle">{jobTitle}</div>
+          <FirstNameLastName>{firstNameLastName}</FirstNameLastName>
+          <JobTitle>{jobTitle}</JobTitle>
         </div>
-      </div>
-      <div className="emailAddress">{emailAddress}</div>
-    </div>
+      </PersonTitle>
+      <EmailAddress>{emailAddress}</EmailAddress>
+    </PersonInfoWrapper>
   );
 }
 
