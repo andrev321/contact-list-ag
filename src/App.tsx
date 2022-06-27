@@ -3,6 +3,7 @@ import PersonInfo from "./PersonInfo";
 import { useFetchData } from "./hooks";
 import { Contact } from "./types";
 import { GetInitials } from "./utils";
+import ScrollToTop from "react-scroll-to-top";
 
 function App() {
   const [selected, setSelected] = React.useState<Contact[]>([]);
@@ -62,6 +63,7 @@ function App() {
           </button>
         )}
       </div>
+      <ScrollToTop smooth component="⬆" />
     </div>
   );
 }
