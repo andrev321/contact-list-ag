@@ -13,20 +13,23 @@ export function useFetchData() {
       setErrorMsg(undefined);
       await apiData()
         .then((result) => setData(result))
-        .catch((error: Error) => setErrorMsg(error.message))
+        .catch(handleError)
         .finally(() => setLoading(false));
     };
+
     getData();
-  }, [setData]);
+  }, []);
 
   const fetchMore = React.useCallback(async () => {
     setLoading(true);
     setErrorMsg(undefined);
     await apiData()
       .then((result) => setData((prevData) => [...prevData, ...result]))
-      .catch((error: Error) => setErrorMsg(error.message))
+      .catch(handleError)
       .finally(() => setLoading(false));
-  }, [setData]);
+  }, []);
+
+  const handleError = (error: Error) => setErrorMsg(error.message);
 
   return { data, loading, errorMsg, fetchMore };
 }

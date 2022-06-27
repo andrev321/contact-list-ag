@@ -43,8 +43,10 @@ function App() {
       <SelectedContacts>
         Selected contacts: {selected.length}
         <SelectedInitials>
-          {selected.map(({ firstNameLastName }) => (
-            <Initials>{GetInitials(firstNameLastName)}</Initials>
+          {selected.map(({ firstNameLastName, id }) => (
+            <Initials key={`initial${id}`}>
+              {GetInitials(firstNameLastName)}
+            </Initials>
           ))}
         </SelectedInitials>
       </SelectedContacts>
