@@ -48,7 +48,7 @@ export function App() {
             onClick={handleSelection}
           />
         ))}
-        {loading && <Loader />}
+        {loading && <Loader data-testid="loader" />}
         {errorMsg}
         {!loading && (
           <FetchButton onClick={fetchMore}>
